@@ -2,10 +2,11 @@ package com.example.recycleview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),CellClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,4 +21,10 @@ class MainActivity : AppCompatActivity() {
         val adapter=CountryAdapter(data,this)
         recView.adapter=adapter
     }
+
+    override fun onCellClickListener(data: ItemsViewModel) {
+        Toast.makeText(this,"${data.country} ${data.capital}",Toast.LENGTH_SHORT).show()
+    }
+
+
 }
