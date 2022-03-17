@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         data.add(ItemsViewModel("Чили","Сантьяго",R.drawable.flag_of_chile))
         data.add(ItemsViewModel("Уругвай","Монтевидео",R.drawable.urugvai))
         data.add(ItemsViewModel("Колумбия","Богота",R.drawable.co))
-        val adapter=CountryAdapter(data)
+        val adapter=CountryAdapter(data,this)
         recView.adapter=adapter
     }
 }

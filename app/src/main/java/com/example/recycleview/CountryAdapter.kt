@@ -1,16 +1,19 @@
 package com.example.recycleview
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class CountryAdapter(private val countries:List<ItemsViewModel>):
-    RecyclerView.Adapter<CountryAdapter.ViewHolder>()
+class CountryAdapter(private val countries:List<ItemsViewModel>,private val cont:Context):
+    RecyclerView.Adapter<CountryAdapter.ViewHolder>(),View.OnClickListener
 {
+    private lateinit var ItemsViewModel:ItemsViewModel
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view=LayoutInflater.from(parent.context).
                 inflate(R.layout.country_list_item,parent,false)
@@ -18,10 +21,11 @@ class CountryAdapter(private val countries:List<ItemsViewModel>):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val ItemsViewModel=countries[position]
+        ItemsViewModel=countries[position]
         holder.country.text=ItemsViewModel.country
         holder.capital.text=ItemsViewModel.capital
         holder.flag.setImageResource(ItemsViewModel.flag)
+        holder.itemView.setOnClickListener(this)
     }
 
     override fun getItemCount(): Int {
@@ -32,5 +36,11 @@ class CountryAdapter(private val countries:List<ItemsViewModel>):
         val country:TextView=ItemView.findViewById(R.id.country)
         val capital:TextView=ItemView.findViewById(R.id.capital)
         val flag:ImageView=ItemView.findViewById(R.id.flag)
+
+    }
+
+    override fun onClick(p0: View?) {
+        Toast.makeText(cont,"Страна:${ItemsViewModel.country} " +
+                "Сталица:${ItemsViewModel.capital}",Toast.LENGTH_SHORT).show()
     }
 }
